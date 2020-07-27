@@ -1,2 +1,2 @@
 # MCFunctionPlusPlus
-See [document](mppdoc.md).
+See [document](doc/mppdoc.md).
