@@ -14,7 +14,7 @@ class compile_error
     :public std::runtime_error
 {
 public:
-    compile_error(unsigned int line, const std::string &message) noexcept
+    compile_error(unsigned int line, const std::string &message)
     : std::runtime_error(make_string("compile error at line ", line, ": ", message)) {
 
     }

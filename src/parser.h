@@ -17,10 +17,10 @@ namespace parser
                 std::istream &in;
                 char currentCharacter = 0;
             public:
-                file_scanning_state(std::istream &in) noexcept: in(in) {}
-                char get_current_character() noexcept;
+                file_scanning_state(std::istream &in) : in(in) {}
+                char get_current_character();
                 char get_next_character();
-                bool eof() noexcept;
+                bool eof();
             }fileScanningState;
 
             enum class token_type {
@@ -31,7 +31,11 @@ namespace parser
                 close_square_bracket,
                 open_brace,
                 close_brace,
-                name
+                name,
+                string,
+                const_type,
+                say,
+                div
             };
 
             struct extra_data {};
@@ -47,7 +51,7 @@ namespace parser
 
             void scan_tokens();
         public:
-            parser(std::istream &in)  noexcept: in(in), fileScanningState(in) {}
+            parser(std::istream &in) : in(in), fileScanningState(in) {}
             ~parser() {};
             void parse();
     };
