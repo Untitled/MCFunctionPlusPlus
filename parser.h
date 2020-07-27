@@ -3,25 +3,15 @@
 
 namespace parser
 {
-    class IParser{
+    class Parser{
         private:
         protected:
             std::string code;
             int readmode;
         public:
-            IParser(){}
-            IParser(std::string c) : code(c){}
-            virtual ~IParser(){}
-            virtual void parse() = 0;
-    };
-
-    class FileParser : public IParser{
-        private:
-        protected:
-        public:
-            FileParser(){}
-            FileParser(std::string c) : IParser(c){}
-            virtual ~FileParser(){}
-            void parse();
+            Parser(){}
+            Parser(std::string c) : code(c){}
+            virtual ~Parser(){}
+            virtual void parse();
     };
 } // namespace parser
