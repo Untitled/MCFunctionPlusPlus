@@ -1,3 +1,3 @@
-func helloworld(){
+func helloworld() [] {
     say "a"
 }

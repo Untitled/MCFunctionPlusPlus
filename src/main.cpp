@@ -1,20 +1,13 @@
-#include <algorithm>
-#include <iostream>
-#include <fstream>
+#include <vector>
 #include <string>
-#include <stack>
+#include <fstream>
+#include "parser.h"
 
-int main(){
-    std::fstream instream("helloworld.fpp");
-    if(!instream.is_open()){
-        return 1; //Can't open file
+using namespace std;
+
+int main(int argc, char** argv) {
+    for(int i = 1; i < argc; ++i) {
+        parser::parser(std::ifstream(argv[i])).parse();
     }
-    std::string code;
-    char c;
-    /*while(!instream.eof()){
-        instream >> c;
-        code.push_back(c);
-    }*/
-    //std::cout << code;
     return 0;
 }
