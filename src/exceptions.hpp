@@ -6,7 +6,7 @@
 public: ClassName(const std::string &message) : std::runtime_error(message) {}\
 };
 
-namespace parser {
+namespace mpp {
 
 DEFINE_EXCEPTION(end_of_file);
 
@@ -20,4 +20,4 @@ public:
     }
 };
 
-} //  namespace parser
+} //  namespace mpp

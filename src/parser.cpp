@@ -3,9 +3,9 @@
 #include "character_util.hpp"
 #include <iostream>
 
-using namespace parser;
+using namespace mpp;
 
-namespace parser {
+namespace mpp {
     char parser::file_scanning_state::get_current_character() {
         return currentCharacter;
     }
@@ -23,7 +23,7 @@ namespace parser {
     void parser::scan_tokens() {
         unsigned int line = 1;
 
-        auto &skip_blanks = [&]() -> unsigned int {
+        auto skip_blanks = [&]() -> unsigned int {
             unsigned int result = 0;
             char c = fileScanningState.get_current_character();
             while(is_blank(c)) {
@@ -37,7 +37,7 @@ namespace parser {
         };
         
 
-        auto &read_name = [&]() -> std::string {
+        auto read_name = [&]() -> std::string {
             std::string result = "";
             char c = fileScanningState.get_current_character();
             if(is_letter(c) || c == '_') {
@@ -199,4 +199,4 @@ namespace parser {
         }
         std::cout << std::flush;
     }
-} // namespace parser
+} // namespace mpp

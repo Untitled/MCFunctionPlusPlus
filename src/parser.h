@@ -5,7 +5,7 @@
 #include <string>
 #include "exceptions.hpp"
 
-namespace parser
+namespace mpp
 {
     class parser {
         protected:
@@ -55,4 +55,4 @@ namespace parser
             ~parser() {};
             void parse();
     };
-} // namespace parser
+} // namespace mpp
