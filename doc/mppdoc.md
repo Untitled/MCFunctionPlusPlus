@@ -21,7 +21,7 @@
 ## 欢迎使用MPP！
 MCFunction Plus Plus，  
 重新定义MCFunction。  
-由 @Messy_Ghost 倾情奉献
+@Messy_Ghost @ChapterII
 ##### 更新日期：2020.7.11 v0.0.2
 
 ## MPP能做什么？

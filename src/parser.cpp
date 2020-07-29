@@ -72,7 +72,7 @@ namespace mpp {
                     }
                     else {
                         //TODO: put extra data
-                        parsed_tokens.push_back(token_type::name);
+                        parsed_tokens.push_back(token(token_type::name,std::any(value)));
                     }
                     continue;
                 }
@@ -187,7 +187,9 @@ namespace mpp {
                 std::cout << "} ";
                 break;
             case token_type::name:
-                std::cout << "<name> ";
+                std::cout << "<name ";
+                if(token.extra_data.has_value())
+                    std::cout << token.extra_data.type().name() << "> ";
                 break;
             case token_type::say:
                 std::cout << "say ";
