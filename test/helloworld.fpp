@@ -8,7 +8,6 @@ namesp minecraft {
                 */
                 say "a"
             }
-
         }
     }
 }
