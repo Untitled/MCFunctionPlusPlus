@@ -178,7 +178,7 @@ namespace mpp {
 
     void parser::scan_global_values() {
         std::size_t i = 0;
-        auto get_next_token = [&]() {
+        auto get_next_token = [&]() ->token&{
             try {
                 return parsed_tokens.at(i++);
             }
