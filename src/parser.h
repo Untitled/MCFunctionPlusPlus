@@ -3,9 +3,8 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include <typeinfo>
 #include <vector>
-#include <stack>
+#include <cstddef>
 
 #include "exceptions.hpp"
 
@@ -32,6 +31,10 @@ private:
 
     enum class token_type {
         function,
+        namesp,
+        folder,
+        mpp,
+        cmd,
         open_bracket,
         close_bracket,
         open_square_bracket,
@@ -44,36 +47,68 @@ private:
         say,
         div
     };
-    /*
-    struct extra_data {
-        void* data;
-        extra_data(data_type type, void* data)
-        {
-        }
-    };
-*/
+
     struct token {
-        token(token_type type)
-            : type(type)
-            , extra_data(nullptr)
+        using extra_data_index_t = std::size_t;
+        token(unsigned int line, token_type type)
+            :line(line),
+             type(type),
+             extra_data_index(0)
         {
         }
-        token(token_type type, std::any extra_data)
-            : type(type)
-            , extra_data(extra_data)
+        token(unsigned int line, token_type type, extra_data_index_t extra_data_index)
+            :type(type),
+             line(line),
+             extra_data_index(extra_data_index)
         {
         }
         ~token()
         {
         }
+        unsigned int line;
         token_type type;
-        std::any extra_data;
+        extra_data_index_t extra_data_index;
+
+        static std::vector<std::string> parsed_names;
+        static std::vector<std::string> parsed_strings;
+        template <typename T>
+        static token::extra_data_index_t store_extra_data(std::vector<T> &storage, const T &data) {
+            storage.push_back(data);
+            return storage.size() - 1;
+        }
+
+        template <typename T>
+        static token::extra_data_index_t store_extra_data(std::vector<T> &storage, T &&data) {
+            storage.push_back(std::move(data));
+            return storage.size() - 1;
+        }
     };
 
     std::vector<token> parsed_tokens;
 
     void scan_tokens();
 
+    struct code_block {
+        enum class type {
+            mpp,
+            cmd
+        }ty;
+        std::vector<token> tokens;
+    };
+
+    struct function {
+        std::string name;
+        std::string namesp;
+        std::vector<std::string> path;
+        std::vector<std::string> arguments;
+        code_block content;
+    };
+
+    struct {
+        std::vector<function> funcs;
+    }global_values;
+
+    void scan_global_values();
 public:
     parser(std::istream& in)
         : in(in)
