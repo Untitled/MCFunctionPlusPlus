@@ -332,7 +332,11 @@ namespace mpp {
             }
         }
 
-        std::vector(std::move(parsed_tokens)).clear();
+        //free memory
+        {
+            std::vector<token> buffer;
+            buffer.swap(parsed_tokens);
+        }
     };
 
     void parser::parse() {
