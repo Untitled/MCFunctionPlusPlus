@@ -317,11 +317,14 @@ namespace mpp {
                 }
             }
             else if(current_token.type == token_type::close_brace) {
-                if(--level == 0) {
+                if(level == 1) {
                     namesp = "";
                 }
-                else {
+                else if(level > 1) {
                     path.pop_back();
+                }
+                else {
+                    throw compile_error(current_token.line, "There shouldn\'t be a close-brace here.");
                 }
             }
             else {
