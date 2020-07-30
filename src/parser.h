@@ -3,8 +3,9 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include <vector>
 #include <typeinfo>
+#include <vector>
+#include <stack>
 
 #include "exceptions.hpp"
 

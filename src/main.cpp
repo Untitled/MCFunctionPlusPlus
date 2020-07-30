@@ -1,19 +1,24 @@
-/*#include <vector>
-#include <string>*/
+/*#include <vector>*/
+#include "parser.h"
 #include <fstream>
 #include <iostream>
-#include "parser.h"
+#include <string>
 
 using namespace std;
 
-int main(int argc, char** argv) {
-    for(int i = 1; i < argc; ++i) {
-        std::ifstream input(argv[i]);
-        if(!input) {
-            std::cerr << mpp::make_string("Cannot open file: ", argv[i], '.');
-            return 1;
+int main(int argc, char** argv)
+{
+    for (int i = 1; i < argc; ++i) {
+        if (argv[i][0] != '-') {
+            std::ifstream input(argv[i]);
+            if (!input) {
+                std::cerr << mpp::make_string("Cannot open file: ", argv[i], '.');
+                return 1;
+            }
+            mpp::parser(input).parse();
+        }else{
+            //args
         }
-        mpp::parser(input).parse();
     }
     return 0;
 }

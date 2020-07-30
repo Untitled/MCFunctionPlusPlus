@@ -72,7 +72,7 @@ namespace mpp {
                     }
                     else {
                         //TODO: put extra data
-                        parsed_tokens.push_back(token(token_type::name,std::any(value)));
+                        parsed_tokens.push_back(token(token_type::name,std::any(value/*.data()*/)));
                     }
                     continue;
                 }
@@ -120,7 +120,7 @@ namespace mpp {
                                 string_value += buffer;
                             }
                             //TODO: put extra data
-                            parsed_tokens.push_back(token_type::string);
+                            parsed_tokens.push_back(token(token_type::string,std::any(string_value)));
                         }
                         break;
                     case '/':
@@ -189,13 +189,18 @@ namespace mpp {
             case token_type::name:
                 std::cout << "<name ";
                 if(token.extra_data.has_value())
-                    std::cout << token.extra_data.type().name() << "> ";
+                    if(token.extra_data.type()==typeid(std::string))
+                        std::cout << std::any_cast<std::string>(token.extra_data);
+                std::cout << "> ";
                 break;
             case token_type::say:
                 std::cout << "say ";
                 break;
             case token_type::string:
-                std::cout << "<string> ";
+                std::cout << "<string ";
+                if(token.extra_data.has_value()&&token.extra_data.type()==typeid(std::string))
+                    std::cout << std::any_cast<std::string>(token.extra_data);
+                std::cout << "> ";
                 break;
             }
         }
