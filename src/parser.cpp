@@ -327,7 +327,7 @@ namespace mpp {
                     throw compile_error(current_token.line, "There shouldn\'t be a close-brace here.");
                 }
                 --level;
-            }
+            }   
             else {
                 throw compile_error(current_token.line, "There shouldn\'t be this token.");
             }
