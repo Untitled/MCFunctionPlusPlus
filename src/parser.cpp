@@ -294,7 +294,8 @@ namespace mpp {
                                         tokens.push_back(std::move(token));
                                     }
 
-                                    global_values.funcs.push_back({func_name, namesp, path, {}});
+                                    code_bl.tokens = std::move(tokens);
+                                    global_values.funcs.push_back(function{location{namesp, path}, {}, code_bl});
                                 }
                                 else {
                                     throw compile_error(brace_op_tk.line, "There should be a { after [<type>].");
@@ -381,11 +382,7 @@ namespace mpp {
         std::cout << std::endl;
         scan_global_values();
         for(auto &func : global_values.funcs) {
-            std::cout << func.namesp << ':';
-            for(auto &folder : func.path) {
-                std::cout << folder << '/';
-            } 
-            std::cout << func.name << std::endl;;
+            std::cout << func.complete_path.to_string() << std::endl;;
         }
     }
 } // namespace mpp
