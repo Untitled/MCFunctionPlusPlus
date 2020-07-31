@@ -45,7 +45,8 @@ private:
         string,
         const_type,
         say,
-        div
+        div,
+        constval
     };
 
     struct token {
