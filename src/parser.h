@@ -96,10 +96,21 @@ private:
         std::vector<token> tokens;
     };
 
-    struct function {
-        std::string name;
+    struct location {
         std::string namesp;
         std::vector<std::string> path;
+        std::string to_string() {
+            std::string result = namesp + ':';
+            for(auto &s : path) {
+                result += s + '/';
+            }
+            if(path.size() > 0) {result.pop_back();}
+            return result;
+        }
+    };
+
+    struct function {
+        location complete_path;
         std::vector<std::string> arguments;
         code_block content;
     };
