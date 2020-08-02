@@ -243,6 +243,7 @@ namespace mpp {
                     if(name_tok.type == token_type::name) {
                         std::string func_name = token::parsed_names.at(name_tok.extra_data_index);
                         //arguments
+                        std::vector<std::string> args;
                         bool specified_arguments = true;
                         auto &brace_tok = get_next_token();
                         if(brace_tok.type == token_type::open_bracket) {
@@ -251,8 +252,11 @@ namespace mpp {
                                 if(token.type == token_type::close_bracket) {
                                     break;
                                 }
-                                else {
-                                    throw std::runtime_error("Have not supported arguments");
+                                else if(token.type ==token_type::name){
+                                    args.push_back(token::parsed_names.at(name_tok.extra_data_index));
+                                    //throw std::runtime_error("Have not supported arguments");
+                                }else{
+                                    throw compile_error(current_token.line, "There should be argument names in () after function");
                                 }
                             }
                         }
@@ -295,7 +299,8 @@ namespace mpp {
                                     }
 
                                     code_bl.tokens = std::move(tokens);
-                                    global_values.funcs.push_back(function{location{namesp, path}, {}, code_bl});
+                                    global_values.funcs.push_back(function{location{namesp, path}, args, code_bl});
+                                    //
                                 }
                                 else {
                                     throw compile_error(brace_op_tk.line, "There should be a { after [<type>].");
