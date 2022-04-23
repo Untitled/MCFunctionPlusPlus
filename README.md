@@ -1,2 +1,3 @@
 # MCFunctionPlusPlus
-See [document](doc/mppdoc.md).
+THIS [document](doc/mppdoc.md) IS DEPRECATED!  
+See MessyGhost's super duper good new readme(?
